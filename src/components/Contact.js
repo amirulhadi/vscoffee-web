@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { HiMail, HiPhone, HiCalendar, HiCheckCircle } from 'react-icons/hi';
+import emailjs from 'emailjs-com';
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -33,24 +35,68 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log('Form submitted:', formData);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        eventType: '',
-        message: ''
+    // The structure of this object must exactly match 
+    // the variable names in your EmailJS template (e.g., {{name}}, {{email}})
+    const formdata = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      eventType: formData.eventType,
+      message: formData.message
+    };
+
+    try {
+      // Validate environment variables
+      const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+      const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+
+      // Debug: Log environment variables (remove in production)
+      console.log('EmailJS Config Check:', {
+        serviceId: serviceId ? '✓ Set' : '✗ Missing',
+        templateId: templateId ? '✓ Set' : '✗ Missing',
+        publicKey: publicKey ? '✓ Set' : '✗ Missing'
       });
-    }, 3000);
+
+      if (!serviceId || !templateId || !publicKey) {
+        console.error('Missing environment variables. Make sure:');
+        console.error('1. .env file exists in the root directory');
+        console.error('2. Variables start with REACT_APP_');
+        console.error('3. Development server was restarted after creating .env');
+        throw new Error('EmailJS environment variables are not configured. Please check your .env file and restart the server.');
+      }
+
+      // Send the email using environment variables for security
+      await emailjs.send(
+        serviceId, 
+        templateId, 
+        formdata,
+        publicKey 
+      );
+      
+      // Only set submitted state to true if the API call succeeds
+      setIsSubmitted(true); 
+      console.log('Form submitted successfully!');
+
+      // Reset form immediately after success
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          eventType: '',
+          message: ''
+        });
+      }, 3000);
+
+    } catch (error) {
+      console.error('Email error:', error);
+      // Optional: Add logic here to show a "failed" message to the user
+    } finally {
+      // This runs whether try or catch succeeded, ensuring the button re-enables
+      setIsSubmitting(false);
+    }
   };
 
   const containerVariants = {
@@ -69,7 +115,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900/30">
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 via-white to-f6d6b8/20">
       <div className="max-w-7xl mx-auto">
         <motion.div
           variants={containerVariants}
@@ -78,8 +124,9 @@ const Contact = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-16"
         >
-          <motion.h2 variants={itemVariants} className="section-title">
-            Get in <span className="text-vs-primary">Touch</span>
+          <motion.h2 variants={itemVariants} className="section-title-split">
+            {/* Get in <span className="text-vs-primary">Touch</span> */}
+            <span className="warm-text">Get in</span> <span className="cool-text">Touch</span>
           </motion.h2>
           <motion.p variants={itemVariants} className="section-subtitle max-w-3xl mx-auto">
             Book VS Coffee for your next event or leave us a message. We'd love to hear from you!
@@ -96,8 +143,8 @@ const Contact = () => {
           {/* Contact Information */}
           <motion.div variants={itemVariants} className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">Let's Brew Something Together</h3>
-              <p className="text-vs-text/90 text-lg leading-relaxed mb-8">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6">Let's Brew Something Together</h3>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8">
                 Whether you're planning a corporate event, tech conference, or private celebration, 
                 we're here to make your coffee experience exceptional.
               </p>
@@ -106,62 +153,62 @@ const Contact = () => {
             <div className="space-y-6">
               <motion.div 
                 whileHover={{ x: 5 }}
-                className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50 hover:border-vs-primary/50 transition-all duration-300"
+                className="flex items-center space-x-4 p-4 bg-white/80 rounded-lg border border-gray-200 hover:border-coffee-beige/50 transition-all duration-300"
               >
                 <div className="w-12 h-12 bg-vs-primary/20 rounded-lg flex items-center justify-center">
                   <HiMail className="w-6 h-6 text-vs-primary" />
                 </div>
                 <div>
-                  <div className="font-semibold text-white">Email</div>
-                  <div className="text-vs-text/80">hello@vscoffee.com</div>
+                  <div className="font-semibold text-gray-800">Email</div>
+                  <div className="text-gray-600">hello.vscoffee@gmail.com</div>
                 </div>
               </motion.div>
 
               <motion.div 
                 whileHover={{ x: 5 }}
-                className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50 hover:border-vs-primary/50 transition-all duration-300"
+                className="flex items-center space-x-4 p-4 bg-white/80 rounded-lg border border-gray-200 hover:border-coffee-beige/50 transition-all duration-300"
               >
                 <div className="w-12 h-12 bg-vs-primary/20 rounded-lg flex items-center justify-center">
                   <HiPhone className="w-6 h-6 text-vs-primary" />
                 </div>
                 <div>
-                  <div className="font-semibold text-white">Phone</div>
-                  <div className="text-vs-text/80">+1 (555) 123-4567</div>
+                  <div className="font-semibold text-gray-800">Phone</div>
+                  <div className="text-gray-600">Will Provide Soon</div>
                 </div>
               </motion.div>
 
               <motion.div 
                 whileHover={{ x: 5 }}
-                className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50 hover:border-vs-primary/50 transition-all duration-300"
+                className="flex items-center space-x-4 p-4 bg-white/80 rounded-lg border border-gray-200 hover:border-coffee-beige/50 transition-all duration-300"
               >
                 <div className="w-12 h-12 bg-vs-primary/20 rounded-lg flex items-center justify-center">
                   <HiCalendar className="w-6 h-6 text-vs-primary" />
                 </div>
                 <div>
-                  <div className="font-semibold text-white">Response Time</div>
-                  <div className="text-vs-text/80">Within 24 hours</div>
+                  <div className="font-semibold text-gray-800">Response Time</div>
+                  <div className="text-gray-600">Within 24 hours</div>
                 </div>
               </motion.div>
             </div>
 
             <div className="bg-gradient-to-r from-vs-primary/10 to-vs-secondary/10 rounded-xl p-6 border border-gray-700/50">
-              <h4 className="text-lg font-semibold text-white mb-3">Why Choose VS Coffee?</h4>
+              <h4 className="text-lg font-semibold text-black mb-3">Why Choose VS Coffee?</h4>
               <ul className="space-y-2 text-vs-text/90">
                 <li className="flex items-center space-x-2">
                   <div className="w-1.5 h-1.5 bg-vs-primary rounded-full"></div>
-                  <span>Professional baristas with tech industry experience</span>
+                  <span className="text-black">Professional baristas with tech industry experience</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <div className="w-1.5 h-1.5 bg-vs-primary rounded-full"></div>
-                  <span>Premium equipment and high-quality beans</span>
+                  <span className="text-black">Premium equipment and high-quality beans</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <div className="w-1.5 h-1.5 bg-vs-primary rounded-full"></div>
-                  <span>Flexible service tailored to your needs</span>
+                  <span className="text-black">Flexible service tailored to your needs</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <div className="w-1.5 h-1.5 bg-vs-primary rounded-full"></div>
-                  <span>Tech-savvy approach to event management</span>
+                  <span className="text-black">Tech-savvy approach to event management</span>
                 </li>
               </ul>
             </div>
@@ -226,7 +273,7 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600/50 rounded-lg text-white placeholder-gray-400 focus:border-vs-primary focus:ring-1 focus:ring-vs-primary transition-all duration-300"
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="60123456789"
                     />
                   </div>
                   <div>

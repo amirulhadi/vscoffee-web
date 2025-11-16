@@ -2,40 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   
   body {
-    font-family: 'Inter', sans-serif;
-    background-color: #1e1e1e;
-    color: #d4d4d4;
+    font-family: 'Rubik', sans-serif;
+    background: linear-gradient(135deg, #fdfdfd 0%, #fafafa 50%, #f6d6b8 100%);
+    color: #2d2d2d;
+    min-height: 100vh;
+  }
+
+  * {
+    cursor: default;
+  }
+
+  button, a, [role="button"] {
+    cursor: pointer;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-vs-primary hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-vs-primary/25;
+    @apply bg-button-gradient text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-button-glow hover:shadow-warm-glow;
+    box-shadow: 0px 4px 10px rgba(198,162,126,0.3);
   }
   
   .btn-secondary {
-    @apply border border-vs-primary text-vs-primary hover:bg-vs-primary hover:text-white font-medium py-3 px-6 rounded-lg transition-all duration-300;
+    @apply border-2 border-coffee-beige text-coffee-beige hover:bg-coffee-beige hover:text-espresso font-semibold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-warm-glow;
+  }
+
+  .btn-ghost {
+    @apply text-sky-blue hover:bg-sky-blue/10 hover:text-sky-blue font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105;
   }
   
   .card {
-    @apply bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-vs-primary/50 transition-all duration-300;
+    @apply bg-warm-gray/50 backdrop-blur-sm border border-soft-brown/50 rounded-2xl p-8 hover:border-coffee-beige/50 hover:shadow-card-hover transition-all duration-500 hover:scale-105;
+    background: linear-gradient(135deg, rgba(198,162,126,0.05) 0%, rgba(51,153,255,0.05) 100%);
+  }
+
+  .card-warm {
+    @apply bg-gradient-to-br from-coffee-beige/10 to-caramel/10 border border-coffee-beige/30 rounded-2xl p-8 hover:border-coffee-beige/60 hover:shadow-warm-glow transition-all duration-500;
   }
   
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-white mb-4;
+    @apply text-4xl md:text-5xl font-bold mb-6;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .section-title-split {
+    @apply text-4xl md:text-5xl font-bold mb-6;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .section-title-split .warm-text {
+    @apply text-coffee-beige;
+  }
+
+  .section-title-split .cool-text {
+    @apply text-sky-blue;
   }
   
   .section-subtitle {
-    @apply text-lg text-vs-text/80 mb-8;
+    @apply text-xl text-black/80 mb-8 leading-relaxed;
+    font-family: 'Nunito Sans', sans-serif;
   }
   
   .code-accent {
-    @apply text-vs-primary font-mono;
+    @apply text-sky-blue font-fira-code;
+  }
+
+  .warm-glow {
+    @apply shadow-warm-glow;
+  }
+
+  .blue-glow {
+    @apply shadow-blue-glow;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, #fdfdfd 0%, #fafafa 30%, #f6d6b8 70%, #6c63ff 100%);
+  }
+
+  .accent-glow {
+    background: radial-gradient(circle at top left, rgba(198,162,126,0.2) 0%, transparent 60%);
+  }
+
+  .steam-animation {
+    animation: steam 2s ease-in-out infinite;
+  }
+
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fafafa;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #C6A27E 0%, #B5835A 100%);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #B5835A 0%, #C6A27E 100%);
   }
 }

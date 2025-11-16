@@ -22,7 +22,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900/50 border-t border-gray-700/50">
+    <footer className="bg-gradient-to-br from-gray-100 via-white to-f6d6b8/20 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           variants={containerVariants}
@@ -34,22 +34,22 @@ const Footer = () => {
           {/* Brand */}
           <motion.div variants={itemVariants} className="space-y-4">
             <div className="flex items-center space-x-2">
-              <span className="text-2xl font-bold text-white">
-                VS <span className="text-vs-primary">Coffee</span>
+              <span className="text-2xl font-bold text-gray-800">
+                VS <span className="text-coffee-beige">Coffee</span>
               </span>
-              <span className="text-vs-primary font-mono text-sm">&lt;/&gt;</span>
+              <span className="text-coffee-beige font-mono text-sm">&lt;/&gt;</span>
             </div>
-            <p className="text-vs-text/80 text-sm leading-relaxed">
+            <p className="text-gray-600 text-sm leading-relaxed">
               Brewed with <HiHeart className="inline w-4 h-4 text-red-400" /> by developers who love coffee.
             </p>
-            <p className="text-vs-text/60 text-xs">
+            <p className="text-gray-500 text-xs">
               Fueling ideas, one cup at a time.
             </p>
           </motion.div>
 
           {/* Quick Links */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-lg font-semibold text-white">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-gray-800">Quick Links</h3>
             <div className="space-y-2">
               {[
                 { name: 'About Us', href: '#about' },
@@ -61,7 +61,7 @@ const Footer = () => {
                   key={link.name}
                   href={link.href}
                   whileHover={{ x: 5 }}
-                  className="block text-vs-text/80 hover:text-vs-primary transition-colors duration-300 text-sm"
+                  className="block text-gray-600 hover:text-coffee-beige transition-colors duration-300 text-sm"
                 >
                   {link.name}
                 </motion.a>
@@ -71,7 +71,7 @@ const Footer = () => {
 
           {/* Social & Contact */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-lg font-semibold text-white">Connect With Us</h3>
+            <h3 className="text-lg font-semibold text-gray-800">Connect With Us</h3>
             <div className="flex space-x-4">
               <motion.a
                 href="https://instagram.com/vscoffee"
@@ -79,25 +79,25 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 bg-gray-800/50 rounded-lg flex items-center justify-center border border-gray-700/50 hover:border-vs-primary/50 hover:bg-vs-primary/10 transition-all duration-300"
+                className="w-10 h-10 bg-white/80 rounded-lg flex items-center justify-center border border-gray-200 hover:border-coffee-beige/50 hover:bg-coffee-beige/10 transition-all duration-300"
                 aria-label="Follow us on Instagram"
               >
-                <FaInstagram className="w-5 h-5 text-vs-text hover:text-vs-primary transition-colors duration-300" />
+                <FaInstagram className="w-5 h-5 text-gray-600 hover:text-coffee-beige transition-colors duration-300" />
               </motion.a>
               
               <motion.a
-                href="mailto:hello@vscoffee.com"
+                href="mailto:hello.vscoffee@gmail.com"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 bg-gray-800/50 rounded-lg flex items-center justify-center border border-gray-700/50 hover:border-vs-primary/50 hover:bg-vs-primary/10 transition-all duration-300"
+                className="w-10 h-10 bg-white/80 rounded-lg flex items-center justify-center border border-gray-200 hover:border-coffee-beige/50 hover:bg-coffee-beige/10 transition-all duration-300"
                 aria-label="Send us an email"
               >
-                <HiMail className="w-5 h-5 text-vs-text hover:text-vs-primary transition-colors duration-300" />
+                <HiMail className="w-5 h-5 text-gray-600 hover:text-coffee-beige transition-colors duration-300" />
               </motion.a>
             </div>
-            <div className="text-vs-text/60 text-sm">
-              <p>hello@vscoffee.com</p>
-              <p>+1 (555) 123-4567</p>
+            <div className="text-gray-500 text-sm">
+              <p>hello.vscoffee@gmail.com</p>
+              <p>60123456789</p>
             </div>
           </motion.div>
         </motion.div>
@@ -108,13 +108,13 @@ const Footer = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="border-t border-gray-700/50 pt-8"
+          className="border-t border-gray-200 pt-8"
         >
           <motion.div 
             variants={itemVariants}
             className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
           >
-            <div className="text-vs-text/60 text-sm">
+            <div className="text-gray-500 text-sm">
               © {currentYear} VS Coffee. All rights reserved.
             </div>
             
@@ -122,14 +122,14 @@ const Footer = () => {
               <motion.a
                 href="#privacy"
                 whileHover={{ scale: 1.05 }}
-                className="text-vs-text/60 hover:text-vs-primary transition-colors duration-300"
+                className="text-gray-500 hover:text-coffee-beige transition-colors duration-300"
               >
                 Privacy Policy
               </motion.a>
               <motion.a
                 href="#terms"
                 whileHover={{ scale: 1.05 }}
-                className="text-vs-text/60 hover:text-vs-primary transition-colors duration-300"
+                className="text-gray-500 hover:text-coffee-beige transition-colors duration-300"
               >
                 Terms of Service
               </motion.a>
@@ -147,7 +147,7 @@ const Footer = () => {
         >
           <motion.div 
             variants={itemVariants}
-            className="text-vs-primary/30 font-mono text-sm"
+            className="text-coffee-beige/40 font-mono text-sm"
           >
             &lt;/&gt; Built with React, Tailwind CSS, and lots of coffee &lt;/&gt;
           </motion.div>

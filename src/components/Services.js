@@ -47,7 +47,7 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900/30">
+    <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 via-white to-f6d6b8/10">
       <div className="max-w-7xl mx-auto">
         <motion.div
           variants={containerVariants}
@@ -56,8 +56,8 @@ const Services = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-16"
         >
-          <motion.h2 variants={itemVariants} className="section-title">
-            Our <span className="text-vs-primary">Services</span>
+          <motion.h2 variants={itemVariants} className="section-title-split">
+            <span className="warm-text">Our</span> <span className="cool-text">Services</span>
           </motion.h2>
           <motion.p variants={itemVariants} className="section-subtitle max-w-3xl mx-auto">
             From corporate events to private celebrations, we bring exceptional coffee experiences to every occasion
@@ -75,18 +75,18 @@ const Services = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ y: -5 }}
-              className="card group hover:shadow-lg hover:shadow-vs-primary/10"
+              whileHover={{ y: -8 }}
+              className="card group hover:shadow-card-hover"
             >
               <div className="text-center mb-6">
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-vs-primary/20 to-vs-secondary/20 rounded-xl mb-4 border border-vs-primary/30"
+                  className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-coffee-beige/20 to-caramel/20 rounded-xl mb-4 border border-coffee-beige/30 hover:shadow-warm-glow"
                 >
-                  <service.icon className="w-8 h-8 text-vs-primary" />
+                  <service.icon className="w-8 h-8 text-coffee-beige" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
-                <p className="text-vs-text/80 text-sm leading-relaxed">{service.description}</p>
+                <h3 className="text-xl font-bold text-gray-800 mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>{service.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed" style={{ fontFamily: 'Rubik, sans-serif' }}>{service.description}</p>
               </div>
 
               <div className="space-y-2">
@@ -96,10 +96,10 @@ const Services = () => {
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: featureIndex * 0.1 }}
-                    className="flex items-center space-x-2 text-sm text-vs-text/70"
+                    className="flex items-center space-x-2 text-sm text-gray-600"
                   >
-                    <div className="w-1.5 h-1.5 bg-vs-primary rounded-full"></div>
-                    <span>{feature}</span>
+                    <div className="w-1.5 h-1.5 bg-coffee-beige rounded-full"></div>
+                    <span style={{ fontFamily: 'Rubik, sans-serif' }}>{feature}</span>
                   </motion.div>
                 ))}
               </div>
@@ -124,9 +124,9 @@ const Services = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="mt-20 text-center"
         >
-          <motion.div variants={itemVariants} className="bg-gradient-to-r from-vs-primary/10 to-vs-secondary/10 rounded-2xl p-8 border border-gray-700/50">
-            <h3 className="text-2xl font-bold text-white mb-4">Ready to Brew Something Amazing?</h3>
-            <p className="text-lg text-vs-text/90 mb-6 max-w-2xl mx-auto">
+          <motion.div variants={itemVariants} className="card-warm p-8">
+            <h3 className="text-2xl font-bold text-gray-800 mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>Ready to Brew Something Amazing?</h3>
+            <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto" style={{ fontFamily: 'Rubik, sans-serif' }}>
               Let's discuss how VS Coffee can elevate your next event with exceptional coffee service.
             </p>
             <motion.a

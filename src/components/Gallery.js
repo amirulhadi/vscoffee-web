@@ -93,7 +93,7 @@ const Gallery = () => {
   };
 
   return (
-    <section id="gallery" className="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="gallery" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-gray-50 to-f6d6b8/10">
       <div className="max-w-7xl mx-auto">
         <motion.div
           variants={containerVariants}
@@ -102,8 +102,9 @@ const Gallery = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-16"
         >
-          <motion.h2 variants={itemVariants} className="section-title">
-            Our <span className="text-vs-primary">Gallery</span>
+          <motion.h2 variants={itemVariants} className="section-title-split">
+            {/* Our <span className="warm-text">Gallery</span> */}
+            <span className="warm-text">Our</span> <span className="cool-text">Gallery</span>
           </motion.h2>
           <motion.p variants={itemVariants} className="section-subtitle max-w-3xl mx-auto">
             A glimpse into our coffee experiences and the moments we've helped create
