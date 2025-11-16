@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+import HeroSection from './components/HeroSection';
+import CoffeeCounter from './components/CoffeeCounter';
 import About from './components/About';
 import Services from './components/Services';
 import Gallery from './components/Gallery';
@@ -9,10 +10,11 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-vs-dark text-vs-text">
+    <div className="min-h-screen hero-gradient text-text-white">
       <Navbar />
       <main>
-        <Hero />
+        <HeroSection />
+        <CoffeeCounter />
         <About />
         <Services />
         <Gallery />
